@@ -17,6 +17,7 @@
 
 ## Phase 2 — Controlled document and rule experiments
 - First slice: browser-only plain-text intake detects FAR/DFARS-like references with line provenance; no applicability judgment.
+- Second slice: browser-only PDF/DOCX text extraction with size/page limits; no upload or application persistence.
 - Add client-side file ingestion for permitted public/synthetic PDFs and DOCX.
 - Parse clause inventory and preserve page/section provenance.
 - Establish a versioned regulatory reference corpus and explicit applicability rules.

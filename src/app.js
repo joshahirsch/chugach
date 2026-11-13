@@ -1,5 +1,6 @@
 import {fixtures} from "./fixtures.js";
 import {extractReferences} from "./extract.js";
+import {readPermittedDocument} from "./documents.js";
 let items=[];let filter="all";let decisions={};
 const $=(id)=>document.getElementById(id);
 const safe=(s)=>String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
@@ -9,6 +10,18 @@ $("run").addEventListener("click",()=>{const choice=$("scope").value;items=fixtu
 document.querySelectorAll("[data-filter]").forEach(el=>el.addEventListener("click",()=>{filter=el.dataset.filter;document.querySelectorAll("[data-filter]").forEach(b=>b.classList.toggle("active",b===el));render();}));
 $("export").addEventListener("click",()=>{const rows=[["id","title","proposed_status","source","reason","reviewer_decision"],...items.map(x=>[x.id,x.title,x.status,x.source,x.reason,decisions[x.id]])];const csv=rows.map(row=>row.map(v=>'"'+String(v).replaceAll('"','""')+'"').join(",")).join("\r\n");const blob=new Blob([csv],{type:"text/csv;charset=utf-8"});const url=URL.createObjectURL(blob);const a=document.createElement("a");a.href=url;a.download="synthetic-flowdown-review.csv";a.click();URL.revokeObjectURL(url);});
 render();
+$("document-file").addEventListener("change",async e=>{
+  const file=e.target.files?.[0];
+  if(!file)return;
+  $("document-status").textContent="Extracting locally. Please wait...";
+  try{
+    const result=await readPermittedDocument(file);
+    if(result.text.length>50000)throw new Error("Extracted text exceeds the 50,000-character intake limit. Use a smaller public sample.");
+    $("clause-text").value=result.text;
+    $("document-status").textContent=`Loaded ${file.name}: ${result.provenance}. ${result.warnings.length} parser warning(s). Review extracted text before analysis.`;
+  }catch(error){$("document-status").textContent=`Import failed: ${error.message}`;}
+  finally{e.target.value="";}
+});
 $("extract").addEventListener("click",()=>{
   const target=$("extracted");
   try {
