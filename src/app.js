@@ -1,4 +1,5 @@
 import {fixtures} from "./fixtures.js";
+import {extractReferences} from "./extract.js";
 let items=[];let filter="all";let decisions={};
 const $=(id)=>document.getElementById(id);
 const safe=(s)=>String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
@@ -8,3 +9,11 @@ $("run").addEventListener("click",()=>{const choice=$("scope").value;items=fixtu
 document.querySelectorAll("[data-filter]").forEach(el=>el.addEventListener("click",()=>{filter=el.dataset.filter;document.querySelectorAll("[data-filter]").forEach(b=>b.classList.toggle("active",b===el));render();}));
 $("export").addEventListener("click",()=>{const rows=[["id","title","proposed_status","source","reason","reviewer_decision"],...items.map(x=>[x.id,x.title,x.status,x.source,x.reason,decisions[x.id]])];const csv=rows.map(row=>row.map(v=>'"'+String(v).replaceAll('"','""')+'"').join(",")).join("\r\n");const blob=new Blob([csv],{type:"text/csv;charset=utf-8"});const url=URL.createObjectURL(blob);const a=document.createElement("a");a.href=url;a.download="synthetic-flowdown-review.csv";a.click();URL.revokeObjectURL(url);});
 render();
+$("extract").addEventListener("click",()=>{
+  const target=$("extracted");
+  try {
+    const found=extractReferences($("clause-text").value);
+    $("extract-summary").textContent=`${found.length} unverified reference occurrence(s) detected. No applicability determination.`;
+    target.innerHTML=found.length?found.map(x=>`<article class="item"><h3>${safe(x.identifier)} · Line ${x.line}</h3><p class="reason">${safe(x.excerpt)}</p><span class="tag review">Unverified candidate</span></article>`).join(""):'<p class="empty">No matching FAR/DFARS-style references found. This does not establish that the text contains no applicable clauses.</p>';
+  } catch(error) {$("extract-summary").textContent=error.message;target.replaceChildren();}
+});

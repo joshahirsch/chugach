@@ -16,6 +16,7 @@
 **Exit:** stakeholders can click through a realistic review concept.
 
 ## Phase 2 — Controlled document and rule experiments
+- First slice: browser-only plain-text intake detects FAR/DFARS-like references with line provenance; no applicability judgment.
 - Add client-side file ingestion for permitted public/synthetic PDFs and DOCX.
 - Parse clause inventory and preserve page/section provenance.
 - Establish a versioned regulatory reference corpus and explicit applicability rules.
