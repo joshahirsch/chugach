@@ -1,17 +1,32 @@
 # Chugach Flow-Down Validator
 
-A GovStrat AI proof-of-concept project for exploring traceable subcontract clause applicability review.
+GovStrat AI proof-of-concept scaffold demonstrating a traceable, human-reviewed subcontract clause decision workflow for Chugach Government Solutions.
 
-> **Prototype only.** This repository is public. Do not commit Chugach contracts, statements of work, CUI, ITAR/EAR-controlled information, credentials, or nonpublic client data. Use public or synthetic materials only.
+**Public repository: synthetic examples only. Never upload or commit confidential client information, CUI, ITAR/EAR-controlled material, real statements of work, or credentials.**
 
-## Objective
+## Run the concept demo
 
-Demonstrate how a reviewer can provide a prime-contract clause set and a subcontract scope, then examine **included**, **excluded**, and **additional-to-review** clause recommendations with reasons and citations. Human reviewers make all final determinations.
+```bash
+npm install
+npm run dev
+```
 
-## Status
+Open the local address printed by Vite. The demo uses fictional clauses and runs entirely in your browser. It has no backend, AI API, persistent storage, or genuine legal applicability decisions.
 
-Initial repository setup. The phased application scaffold is developed on a feature branch before merging.
+```bash
+npm test
+npm run build
+```
 
-## Scope boundary
+## What reviewers can explore
 
-This is not a production decision engine, legal opinion, compliant CUI processing environment, or Maximo/Power BI integration. No automated execution of subcontracts.
+- A sample prime contract reference, scope, and place of performance.
+- Include, exclude, and additional-review candidate lanes.
+- Per-item source and rationale labels.
+- Human acceptance/override decisions and CSV export.
+
+See [phased roadmap](docs/PHASES.md) and [prototype acceptance checklist](docs/ACCEPTANCE.md).
+
+## Not in this proof of concept
+
+Real contract analysis, accuracy claims, production use, Maximo integration, authentication, secure CUI processing, or generated subcontract language. All outputs must be independently reviewed before any use in contracting.
