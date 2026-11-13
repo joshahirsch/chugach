@@ -26,6 +26,7 @@
 **Exit:** repeatable extraction tests on a bounded sample corpus.
 
 ## Phase 3 — AI-assisted comparison and validation
+- Evaluation foundation: versioned synthetic reference cases and metrics harness in `evaluation/`; no legal accuracy claim.
 - Add a secured adapter for a specifically approved model and hosting environment.
 - Compare candidate clauses against expert-reviewed answer sets.
 - Report false negatives and false positives separately; retain full citation evidence.
