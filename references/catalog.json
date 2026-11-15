@@ -1,0 +1,16 @@
+{
+  "catalogVersion": "research-seed-2026-11-15",
+  "retrievedOn": "2026-11-15",
+  "status": "source-links-only",
+  "notice": "This registry does not establish any clause's effective version, applicability, required flow-down, or legal validity for a particular subcontract.",
+  "sources": [
+    {"id":"FAR-52.244-6","system":"FAR","title":"Subcontracts for Commercial Products and Commercial Services","url":"https://www.acquisition.gov/far/52.244-6","role":"clause-text","reviewStatus":"unreviewed"},
+    {"id":"FAR-44.4","system":"FAR","title":"Subcontracts for Commercial Products and Commercial Services","url":"https://www.acquisition.gov/far/subpart-44.4","role":"prescription-context","reviewStatus":"unreviewed"},
+    {"id":"FAR-52.212-5","system":"FAR","title":"Contract Terms and Conditions Required To Implement Statutes or Executive Orders—Commercial Products and Commercial Services","url":"https://www.acquisition.gov/far/52.212-5","role":"clause-text","reviewStatus":"unreviewed"},
+    {"id":"FAR-52.222-26","system":"FAR","title":"Equal Opportunity","url":"https://www.acquisition.gov/far/52.222-26","role":"clause-text","reviewStatus":"unreviewed"},
+    {"id":"FAR-52.228-15","system":"FAR","title":"Performance and Payment Bonds—Construction","url":"https://www.acquisition.gov/far/52.228-15","role":"clause-text","reviewStatus":"unreviewed"},
+    {"id":"DFARS-252.204-7012","system":"DFARS","title":"Safeguarding Covered Defense Information and Cyber Incident Reporting","url":"https://www.acquisition.gov/dfars/252.204-7012-safeguarding-covered-defense-information-and-cyber-incident-reporting.","role":"clause-text","reviewStatus":"unreviewed"},
+    {"id":"DFARS-252.244-7000","system":"DFARS","title":"Subcontracts for Commercial Products or Commercial Services","url":"https://www.acquisition.gov/dfars/252.244-7000-subcontracts-commercial-products-or-commercial-services.","role":"clause-text","reviewStatus":"unreviewed"},
+    {"id":"NFS-1852","system":"NFS","title":"NASA FAR Supplement Part 1852","url":"https://www.acquisition.gov/nfs/part-1852%E2%80%94solicitation-provisions-and-contract-clauses","role":"agency-supplement-index","reviewStatus":"unreviewed"}
+  ]
+}
