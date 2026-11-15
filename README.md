@@ -27,6 +27,8 @@ npm run build
 
 See [phased roadmap](docs/PHASES.md) and [prototype acceptance checklist](docs/ACCEPTANCE.md).
 
+For a stakeholder presentation, use the [five-minute Jonathan walkthrough](docs/JONATHAN_DEMO.md).
+
 ## Not in this proof of concept
 
 Real contract analysis, accuracy claims, production use, Maximo integration, authentication, secure CUI processing, or generated subcontract language. All outputs must be independently reviewed before any use in contracting.

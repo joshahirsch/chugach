@@ -8,7 +8,7 @@ const CONDITIONS = new Set(['scope', 'location', 'subcontractType']);
 export function validateRule(rule) {
   if (!rule || typeof rule.id !== 'string' || !rule.id.trim() || typeof rule.title !== 'string' || !rule.title.trim()) throw new Error('Rule requires id and title');
   if (typeof rule.source !== 'string' || !rule.source.trim() || typeof rule.rationale !== 'string' || !rule.rationale.trim()) throw new Error(`Rule ${rule.id} lacks source or rationale`);
-  if (!STATES.has(rule.onMatch) || rule.onMatch === 'review') throw new Error(`Rule ${rule.id} requires include/exclude onMatch`);
+  if (!STATES.has(rule.onMatch)) throw new Error(`Rule ${rule.id} requires include/exclude/review onMatch`);
   if (!Array.isArray(rule.conditions) || !rule.conditions.length) throw new Error(`Rule ${rule.id} needs conditions`);
   for (const condition of rule.conditions) {
     if (!CONDITIONS.has(condition.field) || !Array.isArray(condition.anyOf) || !condition.anyOf.length || condition.anyOf.some(v => typeof v !== 'string' || !v.trim())) throw new Error(`Malformed condition in ${rule.id}`);
@@ -30,7 +30,10 @@ export function evaluateRule(rule, context = {}) {
   }
   // A mismatch does not justify exclusion unless an explicit exclusion rule matches.
   const status = !unknown && !mismatch ? rule.onMatch : 'review';
-  return {id:rule.id,title:rule.title,status,source:rule.source,reason:status==='review'?'Applicability unresolved. A reviewer must assess unmet or missing conditions.':rule.rationale,evidence,ruleVersion:rule.version ?? 'synthetic-v1',verified:false};
+  const reason=status==='review' && (unknown||mismatch)
+    ? 'Applicability unresolved. A reviewer must assess unmet or missing conditions.'
+    : rule.rationale;
+  return {id:rule.id,title:rule.title,status,source:rule.source,reason,evidence,ruleVersion:rule.version ?? 'synthetic-v1',verified:false};
 }
 
 export function evaluateRules(rules, context) {

@@ -15,6 +15,11 @@ test('missing and partial context always become review',()=>{
   assert.equal(evaluateRule(syntheticRules[0],{}).status,'review');
   assert.equal(evaluateRule(syntheticRules[2],{scope:'construction'}).status,'review');
 });
+test('research-only rule remains in human review even when fictional conditions match',()=>{
+  const result=evaluateRule(syntheticRules[2],context);
+  assert.equal(result.status,'review');
+  assert.match(result.reason,/independent research/);
+});
 test('invalid rule shapes and duplicate ids fail explicitly',()=>{
   assert.throws(()=>evaluateRule({id:'x',title:'X',source:'S',rationale:'R',onMatch:'include',conditions:[{field:'unknown',anyOf:['a']}]},{}));
   assert.throws(()=>evaluateRules([syntheticRules[0],syntheticRules[0]],context));
